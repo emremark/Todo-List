@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.left_panel {
+    width: 20vw;
+    height: 100vh;
+    border-right: 1px black solid;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 12px;
+}
+h1 {
+    font-size: 3em;
+}
+.btn_new_project {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    width: 95%;
+    height: 7%;
+    border-color: rgb(167, 54, 10);
+    margin-bottom: 30px;
+}
+.projects_container {
+    width: 100%;
+    height: 100%;
+}
+.right_panel {
+    display: flex;
+    flex-direction: column;
+}
+.right_top {
+    width: 80vw;
+    height: 12vh;
+    border-bottom: 1px black solid;
+    background-color: whitesmoke;
+}
+.right_bottom {
+    width: 80vw;
+    height: 88vh;
+    background-color: whitesmoke;
+}
