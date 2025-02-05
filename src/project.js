@@ -7,10 +7,6 @@ export class Project {
         addTask(taskk) {
             this.task_list.push(taskk);
         }
-        //Just for test in console
-        list() {
-            return this.task_list;
-        }
 
         removeTask(id) {
             const taskIndex = this.task_list.findIndex(task => task.id === id);
