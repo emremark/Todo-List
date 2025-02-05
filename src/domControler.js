@@ -1,5 +1,4 @@
 import { Project } from "/home/vboxuser/Desktop/js/Todo-List/src/project";
-import { eventHand } from "/home/vboxuser/Desktop/js/Todo-List/src/eventListeners"
 import { oneTask } from "./task";
 
 export const domControler = function () {
@@ -19,18 +18,23 @@ export const domControler = function () {
         defPr.setAttribute("data-name", "Default Project")
         pCont.appendChild(defPr);
         eventL();
-        }
 
-        function setActive(projectN) {
-            let ind = projectList.findIndex(project => project.projectName === projectN)
-            let top = document.querySelector(".right_top");
-            top.textContent = projectList[ind].projectName;
-            let newTask = document.createElement("button");
-            newTask.className = "addTask";
-            top.appendChild(newTask);
-            newTask.textContent = "Add task";
-        }
-        function eventL(){
+    }
+
+
+    function setActive(projectN) {
+        let ind = projectList.findIndex(project => project.projectName === projectN)
+        let foundProject = projectList[ind];
+        let top = document.querySelector(".right_top");
+        top.textContent = foundProject.projectName;
+        let newTask = document.createElement("button");
+        newTask.className = "addTask";
+        top.appendChild(newTask);
+        newTask.textContent = "Add task";
+        activeProject = foundProject;
+    }
+
+    function eventL(){
         document.querySelectorAll(".project_button").forEach(button => {
             button.addEventListener("click", (e) => {
                 let pn = e.target.getAttribute("data-name");
@@ -38,9 +42,13 @@ export const domControler = function () {
             });
         });
     }
-        
 
-        return {onStart}
+
+        //add project button on click
+        //showModal newProject
+        //generate button
+
+    return {onStart}
 }
  /*
     function onStart() {
