@@ -24,14 +24,18 @@
 
     <dialog id="newProjectDialog">
         <form id="projectDia"> <!--method: dialog closes the form once submited-->
-            <div class="close">
-                <button autofocus id="close">X</button>
+            <div class="formContDia">
+                <div class="close">
+                    <button autofocus id="close">X</button>
+                </div>
+                <div class="project_name">
+                    <label for="name">Project Name:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="btnsub">
+                <button id="submitp" type="submit">Submit</button>
+                </div>
             </div>
-            <div class="project_name">
-                <label for="name">Project Name:</label>
-                <input type="text" id="name" required>
-            </div>
-            <button id="submitp" type="submit">Submit</button>
         </form>
     </dialog>
 

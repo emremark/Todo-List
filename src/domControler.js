@@ -17,11 +17,11 @@ export const domControler = function () {
         defPr.textContent = defaultProject.projectName;
         defPr.setAttribute("data-name", "Default Project")
         pCont.appendChild(defPr);
+        makeProject();
         eventL();
-
     }
 
-
+    //find the project in list and set to active
     function setActive(projectN) {
         let ind = projectList.findIndex(project => project.projectName === projectN)
         let foundProject = projectList[ind];
@@ -42,11 +42,38 @@ export const domControler = function () {
             });
         });
     }
+    //When Add Project is clicked new button is generated, new Project made and pushed to list
+    function makeProject() {
+        const addnewP = document.querySelector(".btn_new_project");
+        addnewP.addEventListener("click", () => {
+            let projDialog = document.getElementById("newProjectDialog");
+            projDialog.showModal();
+        });
 
+        document.getElementById("submitp").addEventListener("click", (e) => {
+            e.preventDefault();
+            let projName = document.getElementById("name").value;
+            let newPro = new Project(projName);
+            let pCont = document.getElementById("projects_container");
 
-        //add project button on click
-        //showModal newProject
-        //generate button
+            let newProButton = document.createElement("button");
+            newProButton.className = "project_button";
+            newProButton.textContent = projName;
+            newProButton.setAttribute("data-name", projName)
+
+            newProButton.addEventListener("click", (e) => {
+                let pn = e.target.getAttribute("data-name");
+                setActive(pn);
+            })
+
+            pCont.appendChild(newProButton);
+            projectList.push(newPro);
+            document.getElementById("newProjectDialog").close()
+        });
+        
+    }
+
+       
 
     return {onStart}
 }
