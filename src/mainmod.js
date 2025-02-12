@@ -1,4 +1,5 @@
 import { Project } from "./project";
+import { oneTask } from "./task";
 
 export const mainMod = function () {
     let projectList = [];
@@ -12,6 +13,7 @@ export const mainMod = function () {
         makeProjectButton(activeProject);
         createProjectButton();
         activate(activeProject);
+        addTaskButton();
 
     }
 
@@ -19,10 +21,19 @@ export const mainMod = function () {
         let taskContainer = document.querySelector(".right_bottom");
         taskContainer.innerHTML = "";
 
-        let top = document.querySelector(".right_top");
+        let top = document.querySelector(".active");
         top.textContent = pro.projectName;
         activeProject = pro;
+
         //izlistavanje svih taskova
+        let tcont = document.querySelector(".right_bottom");
+            tcont.innerHTML = "";
+            activeProject.task_list.forEach((task) => {
+            let taskDiv = document.createElement("div");
+            taskDiv.className = "tdiv";
+            taskDiv.textContent = task.title;
+            tcont.appendChild(taskDiv)
+            });
     }
 
 
@@ -57,9 +68,38 @@ export const mainMod = function () {
             activate(newPro);
             document.getElementById("newProjectDialog").close();
         });
+    }
 
+    function addTaskButton() {
+            let newTask = document.querySelector(".addTask");
+            newTask.addEventListener("click", () => {
+            let taskDialog = document.getElementById("taskDia");
+            taskDialog.showModal();
+        })
+        let sub = document.getElementById("submit");
+        sub.addEventListener("click", (e) => {
+            e.preventDefault();
+            let Ttitle = document.getElementById("title").value;
+            let Tdate = document.getElementById("date").value;
+            let Tprio = document.getElementById("priority").value;
+            let Tdesc = document.getElementById("description").value;
 
-    
+            let newTa = new oneTask();
+            newTa.newTask(Ttitle, Tdate, Tprio, Tdesc);
+            activeProject.addTask(newTa);
+
+            let tcont = document.querySelector(".right_bottom");
+            tcont.innerHTML = "";
+            activeProject.task_list.forEach((task) => {
+            let taskDiv = document.createElement("div");
+            taskDiv.className = "tdiv";
+            taskDiv.textContent = task.title;
+            tcont.appendChild(taskDiv)
+            });
+
+            document.getElementById("taskDia").close()
+        }); 
+
     }
     return {onStart}
 }
@@ -67,6 +107,22 @@ export const mainMod = function () {
 /*
 import { Project } from "./project";
 import { ui } from "./ui";
+
+
+    function selectProject() {
+        document.querySelectorAll(".project_button").forEach(button => {
+            button.addEventListener("click", (e) => {
+                let pn = e.target.getAttribute("data-name");
+                ac = projectList.find(project => project.projectName === pn)
+                activeProject = ac
+            });
+        });  
+        renderProjectPage(activeProject);
+        createTask();
+    }
+        */
+
+
 
 
 export const domControler = function () {
