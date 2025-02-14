@@ -119,9 +119,13 @@ h1 {
 
 .btnsub{
     width: 100%;
+    
 }
 #submitp {
-    width: 90%;
+    align-self: center;
+    width: 100%; 
+    max-width: 300px; 
+    margin-top: 1rem;
 }
 
 .close {

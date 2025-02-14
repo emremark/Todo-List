@@ -54,6 +54,14 @@ export const mainMod = function () {
 
     function createProjectButton() {
         const addnewP = document.querySelector(".btn_new_project");
+
+        const cls = document.querySelector("#closeD");
+        cls.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.getElementById("newProjectDialog").close();
+            document.getElementById("name").value = "";
+        })
+
         addnewP.addEventListener("click", () => {
             let projDialog = document.getElementById("newProjectDialog");
             projDialog.showModal();
@@ -76,6 +84,17 @@ export const mainMod = function () {
             let taskDialog = document.getElementById("taskDia");
             taskDialog.showModal();
         })
+
+        const cls2 = document.querySelector("#close");
+        cls2.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.getElementById("taskDia").close();
+            document.getElementById("title").value = "";
+            document.getElementById("date").value = "";
+            document.getElementById("priority").value = "";
+            document.getElementById("description").value = "";
+        })
+
         let sub = document.getElementById("submit");
         sub.addEventListener("click", (e) => {
             e.preventDefault();
