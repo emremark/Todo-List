@@ -14,6 +14,7 @@ export const mainMod = function () {
         createProjectButton();
         activate(activeProject);
         addTaskButton();
+        window.projectList = projectList;
 
     }
 
@@ -36,11 +37,12 @@ export const mainMod = function () {
             });
     }
 
-
+//Da bi radio DELETE NEMOJ DA RADIS APEND PROJECT DUGMETA NEGO NOVA FUNKCIJA FOREACH
     function makeProjectButton(pro) {
         let pCont = document.getElementById("projects_container");
         let projectButton = document.createElement("button");
 
+       
         projectButton.className = "project_button";
         projectButton.textContent = pro.projectName;
         projectButton.setAttribute("data-name", pro.projectName);
@@ -50,6 +52,22 @@ export const mainMod = function () {
         })
 
         pCont.appendChild(projectButton);
+
+        if (pro.projectName != "Default Project") {
+            let del = document.createElement("button");
+            del.className = "project_button_del";
+            del.textContent = "Delete"
+            
+            del.addEventListener("click", (e) => {
+                e.stopPropagation();
+                let theOne = projectList.findIndex(project => project === pro);
+                projectList.splice(theOne, 1);
+                projectButton.remove();
+                activate(projectList[0]);
+            })
+
+            projectButton.appendChild(del)
+            }
     } 
 
     function createProjectButton() {
@@ -125,5 +143,6 @@ export const mainMod = function () {
         }); 
 
     }
+
     return {onStart}
 }

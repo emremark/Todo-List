@@ -136,3 +136,7 @@ button:hover {
     cursor: pointer;
     box-shadow: 0 0 5px gray;
   }
+
+.project_button_del {
+    background-color: aqua;
+}
