@@ -75,22 +75,23 @@ h1 {
 
 .right_bottom {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-rows: 100px;
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    padding: 20px;
+    padding: 10px;
     width: 100%;
     overflow-y: auto;
     box-sizing: border-box;
+    grid-auto-rows: 200px;
 }
 
 .tdiv {
     background-color: rgb(247, 244, 244);
     width: 100%;
-    height: 100%;
+    height: 200px;
     border-radius: 20px;
     border: 2px solid;
     border-color: rgb(167, 54, 10, 0.7);
+    
 }
 
 .tdiv:hover {
