@@ -37,7 +37,7 @@ export const mainMod = function () {
             });
     }
 
-//Da bi radio DELETE NEMOJ DA RADIS APEND PROJECT DUGMETA NEGO NOVA FUNKCIJA FOREACH
+
     function makeProjectButton(pro) {
         let pCont = document.getElementById("projects_container");
         let projectButton = document.createElement("button");
@@ -53,22 +53,35 @@ export const mainMod = function () {
 
         pCont.appendChild(projectButton);
 
-        if (pro.projectName != "Default Project") {
-            let del = document.createElement("button");
-            del.className = "project_button_del";
-            del.textContent = "Delete"
+        let del = document.createElement("button");
+        del.className = "project_button_del";
+        del.textContent = "Delete"
+        //Delete button, if the active project is deleted activate default, if default if missing wire No projects 
+        del.addEventListener("click", (e) => {
+            e.stopPropagation();
+            let theOne = projectList.findIndex(project => project === pro);
             
-            del.addEventListener("click", (e) => {
-                e.stopPropagation();
-                let theOne = projectList.findIndex(project => project === pro);
-                projectList.splice(theOne, 1);
-                projectButton.remove();
-                activate(projectList[0]);
-            })
-
-            projectButton.appendChild(del)
+            if (activeProject === projectList[theOne]) {
+                activate(projectList[0])
             }
+            projectList.splice(theOne, 1);
+            if (projectList.length === 0) {
+                noProject();
+            }
+            
+            projectButton.remove();
+        })
+        projectButton.appendChild(del)
     } 
+
+    function noProject() {
+        activeProject = ""
+        let taskContainer = document.querySelector(".right_bottom");
+        taskContainer.innerHTML = "";
+
+        let top = document.querySelector(".active");
+        top.textContent = "No projects"
+    }
 
     function createProjectButton() {
         const addnewP = document.querySelector(".btn_new_project");
