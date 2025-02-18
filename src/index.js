@@ -8,5 +8,5 @@ import { mainMod } from "./mainmod";
 
 const { onStart } = mainMod();
 document.addEventListener("DOMContentLoaded", () => {
-    onStart()
+    onStart();
 })

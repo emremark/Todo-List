@@ -32,8 +32,20 @@ export const mainMod = function () {
             activeProject.task_list.forEach((task) => {
             let taskDiv = document.createElement("div");
             taskDiv.className = "tdiv";
-            taskDiv.textContent = task.title;
             tcont.appendChild(taskDiv)
+
+            let taskName = document.createElement("div");
+            let ddate = document.createElement("div");
+            taskName.textContent = "Task: " + task.title;
+            ddate.textContent = "Due date: " + task.dueDate; 
+            taskName.className = "tmain1"
+            ddate.className = "tmain2"
+
+            
+            taskDiv.appendChild(taskName);
+            taskDiv.appendChild(ddate);
+            tcont.appendChild(taskDiv)
+
             });
     }
 
@@ -100,13 +112,19 @@ export const mainMod = function () {
 
         document.getElementById("submitp").addEventListener("click", (e) => {
             e.preventDefault();
+            let f = document.querySelector("#projectDia");
+
             let projName = document.getElementById("name").value;
+
+            if (projName.length > 0) {
             let newPro = new Project(projName);
             makeProjectButton(newPro);
             projectList.push(newPro);
             activate(newPro);
             document.getElementById("newProjectDialog").close();
             document.getElementById("name").value = "";
+            }
+            else {f.reportValidity();}
         });
     }
 
@@ -114,7 +132,10 @@ export const mainMod = function () {
             let newTask = document.querySelector(".addTask");
             newTask.addEventListener("click", () => {
             let taskDialog = document.getElementById("taskDia");
+            if (activeProject !== "") {
             taskDialog.showModal();
+            }
+            else {alert("Create a project first")}
         })
 
         const cls2 = document.querySelector("#close");
@@ -128,13 +149,19 @@ export const mainMod = function () {
         })
 
         let sub = document.getElementById("submit");
+
         sub.addEventListener("click", (e) => {
             e.preventDefault();
+            let f = document.querySelector("#taskDD");
+            if ( !f.checkValidity() ) {
+                f.reportValidity();
+                return;
+            }
+
             let Ttitle = document.getElementById("title").value;
             let Tdate = document.getElementById("date").value;
             let Tprio = document.getElementById("priority").value;
             let Tdesc = document.getElementById("description").value;
-
             let newTa = new oneTask();
             newTa.newTask(Ttitle, Tdate, Tprio, Tdesc);
             activeProject.addTask(newTa);
@@ -144,10 +171,20 @@ export const mainMod = function () {
             activeProject.task_list.forEach((task) => {
             let taskDiv = document.createElement("div");
             taskDiv.className = "tdiv";
-            taskDiv.textContent = task.title;
+
+            let taskName = document.createElement("div");
+            let ddate = document.createElement("div");
+            taskName.textContent = "Task: " + task.title;
+            ddate.textContent = "Due date: " + task.dueDate; 
+            taskName.className = "tmain1"
+            ddate.className = "tmain2"
+
+            
+            taskDiv.appendChild(taskName);
+            taskDiv.appendChild(ddate);
             tcont.appendChild(taskDiv)
             });
-
+            
             document.getElementById("taskDia").close()
             document.getElementById("title").value = "";
             document.getElementById("date").value = "";
@@ -155,7 +192,9 @@ export const mainMod = function () {
             document.getElementById("description").value = "";
         }); 
 
+
     }
 
     return {onStart}
+    
 }

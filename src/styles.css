@@ -6,7 +6,7 @@ body {
 .left_panel {
     width: 20vw;
     height: 99vh;
-    border-right: 1px black solid;
+    border-right: 2px rgb(46, 45, 45) solid;
     background-color: whitesmoke;
     display: flex;
     flex-direction: column;
@@ -40,7 +40,7 @@ h1 {
 .right_top {
     width: 80vw;
     height: 12vh;
-    border-bottom: 1px black solid;
+    border-bottom: 2px rgb(46, 45, 45) solid;
     background-color: whitesmoke;
 }
 .right_bottom {
@@ -94,7 +94,15 @@ h1 {
     border-radius: 20px;
     border: 2px solid;
     border-color: rgb(167, 54, 10, 0.7);
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tmain1, .tmain2 {
+    font-size: 1.5em;
+    height: 30%;
+    width: 80%;
 }
 
 .tdiv:hover {
@@ -143,7 +151,7 @@ button:hover {
 
 
 .project_button_del {
-    background-color: rgb(207, 55, 55);
+    background-color: rgb(187, 77, 77);
     margin-left: auto;
     border-radius: 5px;
     width: 25%;
@@ -151,7 +159,7 @@ button:hover {
 }
 
 #taskDD {
-    height: 400px;
+    height: 350px;
     width: 350px;
     display: flex;
     flex-direction: column;
@@ -190,6 +198,13 @@ button:hover {
     
 }
 #description {
-    width: 100%;
+    width: 99%;
+    min-height: 40px;
     resize: none;
+}
+#submit {
+    border-radius: 5px;
+    margin-top: 9px;
+    height: 32px;
+    background-color: rgba(208, 209, 211, 0.7);;
 }
