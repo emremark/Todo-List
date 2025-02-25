@@ -24,6 +24,8 @@ export const eventListeners = (function () {
         let projName = document.getElementById("name").value;
         ProjectManager.createNewProject(projName);
         UI.renderProjects();
+        document.getElementById("newProjectDialog").close();
+        document.getElementById("name").value = "";
     })
 
     document.getElementById("projects_container").addEventListener("click", (event) => {
