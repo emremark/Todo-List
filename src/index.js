@@ -1,12 +1,8 @@
 import "/home/vboxuser/Desktop/js/Todo-List/src/styles.css"
-import { Project } from "/home/vboxuser/Desktop/js/Todo-List/src/project"
-import { oneTask } from "/home/vboxuser/Desktop/js/Todo-List/src/task"
-import { mainMod } from "./mainmod";
+import { appMain } from "./app";
 
 
-
-
-const { onStart } = mainMod();
+const { onStart } = appMain;
 document.addEventListener("DOMContentLoaded", () => {
     onStart();
 })

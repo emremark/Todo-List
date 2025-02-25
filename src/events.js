@@ -1,3 +1,44 @@
+import { ProjectManager } from "/home/vboxuser/Desktop/js/Todo-List/src/project"
+import { UI } from "./UI";
+
+export const eventListeners = (function () {
+
+    function initializeEvents() {
+
+    const addnewP = document.querySelector(".btn_new_project");
+    const cls = document.querySelector("#closeD");
+
+    addnewP.addEventListener("click", () => {
+        let projDialog = document.getElementById("newProjectDialog");
+        projDialog.showModal();
+    });
+
+    cls.addEventListener("click", (e) => {
+        e.preventDefault();
+        document.getElementById("newProjectDialog").close();
+        document.getElementById("name").value = "";
+    })
+
+    document.getElementById("submitp").addEventListener("click", (e) => {
+        e.preventDefault();
+        let projName = document.getElementById("name").value;
+        ProjectManager.createNewProject(projName);
+        UI.renderProjects();
+    })
+
+    document.getElementById("projects_container").addEventListener("click", (event) => {
+        if (event.target.classList.contains("project_button")) {
+            let clickedProjectName = event.target.getAttribute("data-name");
+            let clickedProjectObj = ProjectManager.projectList.find(proj => proj.projectName === clickedProjectName);
+            UI.renderActiveProject(clickedProjectObj);
+        }
+    })
+
+    }   
+    return {initializeEvents}
+})();
+
+/*
 import { Project } from "./project";
 import { oneTask } from "./task";
 
@@ -198,3 +239,5 @@ export const mainMod = function () {
     return {onStart}
     
 }
+
+*/

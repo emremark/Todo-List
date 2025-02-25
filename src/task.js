@@ -1,19 +1,12 @@
 export class oneTask {
-        constructor() {
-            this.title = "";
-            this.desc = "";
-            this.dueDate = "";
-            this.priority = "";
-            
-        }
-        newTask(title, dueDate, priority, desc) {
+    static count = 0;
+        constructor(title, dueDate, priority, description) {
+            this.id = ++oneTask.count;
             this.title = title;
-            this.desc = desc
             this.dueDate = dueDate;
             this.priority = priority;
-            
+            this.description = description;
         }
-
 }
 
 
