@@ -5,6 +5,7 @@ export const eventListeners = (function () {
 
     function initializeEvents() {
 
+    //Click add new project to open dialog and x to close dialog
     const addnewP = document.querySelector(".btn_new_project");
     const cls = document.querySelector("#closeD");
 
@@ -18,7 +19,7 @@ export const eventListeners = (function () {
         document.getElementById("newProjectDialog").close();
         document.getElementById("name").value = "";
     })
-
+    //Submit the new project and call UI function
     document.getElementById("submitp").addEventListener("click", (e) => {
         e.preventDefault();
         let projName = document.getElementById("name").value;
@@ -27,7 +28,7 @@ export const eventListeners = (function () {
         document.getElementById("newProjectDialog").close();
         document.getElementById("name").value = "";
     })
-
+    //Event listener for entire projects area, if the clicked target is of class project_button get name and find that name in project list. Call UI to render it.
     document.getElementById("projects_container").addEventListener("click", (event) => {
         if (event.target.classList.contains("project_button")) {
             let clickedProjectName = event.target.getAttribute("data-name");
@@ -35,8 +36,22 @@ export const eventListeners = (function () {
             UI.renderActiveProject(clickedProjectObj);
         }
     })
+    //Add new task event for open dialog and x to close it
+    document.querySelector(".addTask").addEventListener("click", () => {
+            let taskDialog = document.getElementById("taskDia");
+            taskDialog.showModal();
+        })
 
+    document.querySelector("#close").addEventListener("click", (e) => {
+            e.preventDefault();
+            document.getElementById("taskDia").close();
+            document.getElementById("title").value = "";
+            document.getElementById("date").value = "";
+            document.getElementById("priority").value = "";
+            document.getElementById("description").value = "";
+        })
     }   
+    
     return {initializeEvents}
 })();
 
