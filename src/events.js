@@ -47,14 +47,11 @@ export const eventListeners = (function () {
     document.querySelector("#close").addEventListener("click", (e) => {
             e.preventDefault();
             document.getElementById("taskDia").close();
-            document.getElementById("title").value = "";
-            document.getElementById("date").value = "";
-            document.getElementById("priority").value = "";
-            document.getElementById("description").value = "";
+            document.querySelector("#taskDD").reset();
         })
     }   
 
-    //Submit Task
+    //Add new task submit button
     document.querySelector("#submit").addEventListener("click", (e) => {
         e.preventDefault();
         let f = document.querySelector("#taskDD");
@@ -67,9 +64,22 @@ export const eventListeners = (function () {
         let Tprio = document.getElementById("priority").value;
         let Tdesc = document.getElementById("description").value;
         let newTa = new oneTask(Ttitle, Tdate, Tprio, Tdesc);
+
         ProjectModule.getActive().addTask(newTa);
         UI.renderActiveProject(ProjectModule.getActive());
+
         document.querySelector("#taskDia").close();
+        f.reset();
+    })
+    //Delete button click event
+    document.getElementById("projects_container").addEventListener("click", (event) => {
+        if (event.target.classList.contains("project_button_del")) {
+        event.stopPropagation();
+        let parentP = event.target.getAttribute("data-pname");
+        let foundP = ProjectModule.projectList.find(proj => proj.projectName === parentP);
+        ProjectModule.removeProject(foundP);
+        UI.renderProjects();
+        }
     })
     
     return {initializeEvents}

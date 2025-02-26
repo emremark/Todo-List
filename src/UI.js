@@ -11,6 +11,12 @@ export const UI = (function () {
             projectButton.textContent = project.projectName;
             projectButton.setAttribute("data-name", project.projectName);
             pCont.appendChild(projectButton);
+
+            let del = document.createElement("button");
+            del.className = "project_button_del";
+            del.textContent = "Delete";
+            del.setAttribute("data-pname", project.projectName);
+            projectButton.appendChild(del);
         })
     }
 
