@@ -40,9 +40,13 @@ export const eventListeners = (function () {
     })
     //Add new task event for open dialog and x to close it
     document.querySelector(".addTask").addEventListener("click", () => {
+            if (ProjectModule.projectList.length > 0) {
             let taskDialog = document.getElementById("taskDia");
             taskDialog.showModal();
+            }
+            else { alert("Please add a project first") };
         })
+        
 
     document.querySelector("#close").addEventListener("click", (e) => {
             e.preventDefault();
@@ -77,9 +81,21 @@ export const eventListeners = (function () {
         event.stopPropagation();
         let parentP = event.target.getAttribute("data-pname");
         let foundP = ProjectModule.projectList.find(proj => proj.projectName === parentP);
-        ProjectModule.removeProject(foundP);
-        UI.renderProjects();
+            if (foundP === ProjectModule.getActive() && ProjectModule.projectList.length > 1) {
+                ProjectModule.removeProject(foundP);
+                ProjectModule.setActive(ProjectModule.projectList[0]);
+                UI.renderActiveProject(ProjectModule.projectList[0]);
+            }
+            else if (foundP === ProjectModule.getActive() && ProjectModule.projectList.length === 1) {
+                ProjectModule.removeProject(foundP);
+                UI.renderNoProject();
+            }
+            else {
+                ProjectModule.removeProject(foundP);
+            }
         }
+        UI.renderProjects();
+
     })
     
     return {initializeEvents}

@@ -34,6 +34,14 @@ export const UI = (function () {
         })
     }
 
-    return { renderProjects, renderActiveProject }
+    function renderNoProject() {
+        let taskContainer = document.querySelector(".right_bottom");
+        taskContainer.innerHTML = "";
+
+        let top = document.querySelector(".active");
+        top.textContent = "No projects";
+    }
+
+    return { renderProjects, renderActiveProject, renderNoProject }
 
 })();
