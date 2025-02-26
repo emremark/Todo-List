@@ -1,11 +1,11 @@
-import { ProjectManager } from "./project";
+import { ProjectModule } from "./project";
 
 export const UI = (function () {
     
     function renderProjects() {
         let pCont = document.getElementById("projects_container");
         pCont.innerHTML = "";
-        ProjectManager.projectList.forEach((project) => {
+        ProjectModule.projectList.forEach((project) => {
             let projectButton = document.createElement("button");
             projectButton.className = "project_button";
             projectButton.textContent = project.projectName;

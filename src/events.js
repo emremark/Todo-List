@@ -1,5 +1,6 @@
-import { ProjectManager } from "/home/vboxuser/Desktop/js/Todo-List/src/project"
+import { ProjectModule } from "/home/vboxuser/Desktop/js/Todo-List/src/project"
 import { UI } from "./UI";
+import { oneTask } from "./task";
 
 export const eventListeners = (function () {
 
@@ -23,7 +24,7 @@ export const eventListeners = (function () {
     document.getElementById("submitp").addEventListener("click", (e) => {
         e.preventDefault();
         let projName = document.getElementById("name").value;
-        ProjectManager.createNewProject(projName);
+        ProjectModule.createNewProject(projName);
         UI.renderProjects();
         document.getElementById("newProjectDialog").close();
         document.getElementById("name").value = "";
@@ -32,8 +33,9 @@ export const eventListeners = (function () {
     document.getElementById("projects_container").addEventListener("click", (event) => {
         if (event.target.classList.contains("project_button")) {
             let clickedProjectName = event.target.getAttribute("data-name");
-            let clickedProjectObj = ProjectManager.projectList.find(proj => proj.projectName === clickedProjectName);
+            let clickedProjectObj = ProjectModule.projectList.find(proj => proj.projectName === clickedProjectName);
             UI.renderActiveProject(clickedProjectObj);
+            ProjectModule.setActive(clickedProjectObj);
         }
     })
     //Add new task event for open dialog and x to close it
@@ -51,6 +53,24 @@ export const eventListeners = (function () {
             document.getElementById("description").value = "";
         })
     }   
+
+    //Submit Task
+    document.querySelector("#submit").addEventListener("click", (e) => {
+        e.preventDefault();
+        let f = document.querySelector("#taskDD");
+        if ( !f.checkValidity() ) {
+            f.reportValidity();
+            return;
+        }
+        let Ttitle = document.getElementById("title").value;
+        let Tdate = document.getElementById("date").value;
+        let Tprio = document.getElementById("priority").value;
+        let Tdesc = document.getElementById("description").value;
+        let newTa = new oneTask(Ttitle, Tdate, Tprio, Tdesc);
+        ProjectModule.getActive().addTask(newTa);
+        UI.renderActiveProject(ProjectModule.getActive());
+        document.querySelector("#taskDia").close();
+    })
     
     return {initializeEvents}
 })();

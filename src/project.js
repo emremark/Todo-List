@@ -1,5 +1,5 @@
 
-export const ProjectManager = (function () {
+export const ProjectModule = (function () {
 
     const projectList = [];
     let activeProject = "";
