@@ -53,7 +53,7 @@ export const eventListeners = (function () {
             document.getElementById("taskDia").close();
             document.querySelector("#taskDD").reset();
         })
-    }   
+       
 
     //Add new task submit button
     document.querySelector("#submit").addEventListener("click", (e) => {
@@ -98,6 +98,18 @@ export const eventListeners = (function () {
 
     })
     
+    //Task button events Delete:
+    document.querySelector(".right_bottom").addEventListener("click", (event) => {
+        if (event.target.classList.contains("delTaskButton")) {
+            event.stopPropagation();
+            let taskId = Number(event.target.getAttribute("data-taskt"));
+            let acti = ProjectModule.getActive();
+            acti.removeTask(taskId);
+            UI.renderActiveProject(acti);
+        }
+    })
+    
+}
     return {initializeEvents}
 })();
 
