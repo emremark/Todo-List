@@ -30,18 +30,34 @@ export const UI = (function () {
         project.task_list.forEach((item) => {
             let taskDiv = document.createElement("div");
             taskDiv.className = "tdiv";
-            //taskDiv.textContent = `Title: ${item.title}\nPriority: ${item.prority}\nDue Date: ${item.dueDate}`;
+
+            let taskContentDiv = document.createElement("div");
+            taskContentDiv.className = "taskContentDiv"
+
+            let taskButtonCont = document.createElement("div");
+            taskButtonCont.className = "taskButtonsCont";
+
+            let delTaskButton = document.createElement("button");
+            delTaskButton.className = "delTaskButton"
+            let editTaskButton = document.createElement("button");
+            editTaskButton.className = "editTaskButton"
+
             let task_title = document.createElement("div");
             let task_priority = document.createElement("div");
             let task_due = document.createElement("div");
+
             task_title.textContent = `Title: ${item.title}`;
             task_priority.textContent = `Title: ${item.priority}`;
             task_due.textContent = `Title: ${item.dueDate}`;
 
-            taskDiv.appendChild(task_title);
-            taskDiv.appendChild(task_priority);
-            taskDiv.appendChild(task_due);
-            taskContainer.appendChild(taskDiv)
+            taskButtonCont.appendChild(delTaskButton);
+            taskButtonCont.appendChild(editTaskButton);
+            taskContentDiv.appendChild(task_title);
+            taskContentDiv.appendChild(task_priority);
+            taskContentDiv.appendChild(task_due);
+            taskDiv.appendChild(taskContentDiv);
+            taskDiv.appendChild(taskButtonCont);
+            taskContainer.appendChild(taskDiv);
         })
     }
 
