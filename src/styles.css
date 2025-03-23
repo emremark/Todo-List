@@ -209,3 +209,17 @@ button:hover {
     height: 32px;
     background-color: rgba(208, 209, 211, 0.7);;
 }
+.taskContentDiv {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 70%;
+    font-size: 1.5em;
+}
+.taskButtonsCont {
+    display: flex;
+    gap: 20px;
+    height: 15%;
+    width: 90%;
+    justify-content: end;
+}

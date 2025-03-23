@@ -37,21 +37,24 @@ export const UI = (function () {
             let taskButtonCont = document.createElement("div");
             taskButtonCont.className = "taskButtonsCont";
 
-            let delTaskButton = document.createElement("button");
-            delTaskButton.className = "delTaskButton"
             let editTaskButton = document.createElement("button");
-            editTaskButton.className = "editTaskButton"
+            editTaskButton.className = "editTaskButton";
+            editTaskButton.textContent = "Edit";
+            let delTaskButton = document.createElement("button");
+            delTaskButton.className = "delTaskButton";
+            delTaskButton.textContent = "Delete";
+            
 
             let task_title = document.createElement("div");
             let task_priority = document.createElement("div");
             let task_due = document.createElement("div");
 
             task_title.textContent = `Title: ${item.title}`;
-            task_priority.textContent = `Title: ${item.priority}`;
-            task_due.textContent = `Title: ${item.dueDate}`;
+            task_priority.textContent = `Priority: ${item.priority}`;
+            task_due.textContent = `Due date: ${item.dueDate}`;
 
-            taskButtonCont.appendChild(delTaskButton);
             taskButtonCont.appendChild(editTaskButton);
+            taskButtonCont.appendChild(delTaskButton);
             taskContentDiv.appendChild(task_title);
             taskContentDiv.appendChild(task_priority);
             taskContentDiv.appendChild(task_due);
