@@ -30,17 +30,14 @@ export const UI = (function () {
         project.task_list.forEach((item) => {
             let taskDiv = document.createElement("div");
             taskDiv.className = "tdiv";
+            taskDiv.setAttribute("data-taskt", item.id);
             //Div for task info containment
             let taskContentDiv = document.createElement("div");
             taskContentDiv.className = "taskContentDiv"
-            //Div for task buttons containment
+            //Div for task button containment
             let taskButtonCont = document.createElement("div");
             taskButtonCont.className = "taskButtonsCont";
-            //Tasks buttons Delete and Edit
-            let editTaskButton = document.createElement("button");
-            editTaskButton.className = "editTaskButton";
-            editTaskButton.textContent = "Edit";
-
+            //Tasks button Delete
             let delTaskButton = document.createElement("button");
             delTaskButton.className = "delTaskButton";
             delTaskButton.textContent = "Delete";
@@ -54,7 +51,6 @@ export const UI = (function () {
             task_priority.textContent = `Priority: ${item.priority}`;
             task_due.textContent = `Due date: ${item.dueDate}`;
 
-            taskButtonCont.appendChild(editTaskButton);
             taskButtonCont.appendChild(delTaskButton);
             taskContentDiv.appendChild(task_title);
             taskContentDiv.appendChild(task_priority);

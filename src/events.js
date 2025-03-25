@@ -75,6 +75,7 @@ export const eventListeners = (function () {
         document.querySelector("#taskDia").close();
         f.reset();
     })
+
     //Delete button click event
     document.getElementById("projects_container").addEventListener("click", (event) => {
         if (event.target.classList.contains("project_button_del")) {
@@ -107,17 +108,20 @@ export const eventListeners = (function () {
             acti.removeTask(taskId);
             UI.renderActiveProject(acti);
         }
-    });
-    /*
-    //Task button event for Edit:
-    document.document.querySelector(".right_bottom").addEventListener("click", (event) => {
-        if (event.target.classList.contains("editTaskButton")) {
+        if (event.target.classList.contains("tdiv")) {
             event.stopPropagation();
-            let taskDialog = document.getElementById("taskDia");
-            taskDialog.showModal();
+            let taskId = Number(event.target.getAttribute("data-taskt"));
+            let activ = ProjectModule.getActive();
+            let taskObj = activ.getTask(taskId);
+
+            document.getElementById("title").value = taskObj.title;
+            document.getElementById("date").value = taskObj.dueDate;
+            document.getElementById("priority").value = taskObj.priority;
+            document.getElementById("description").value = taskObj.description;
+            document.querySelector("#taskDia").showModal();
         }
     });
-    */
-}
+
+}    
     return {initializeEvents}
 })();

@@ -22,6 +22,10 @@ export const ProjectModule = (function () {
                 this.task_list.splice(taskIndex, 1);
             }
         }
+
+        getTask(id) {
+            return this.task_list.find(task => task.id === id);
+        }
     }
 
     function createNewProject(pName) {
