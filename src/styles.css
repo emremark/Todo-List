@@ -170,7 +170,7 @@ button:hover {
     margin-top: 10px;
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: end;
 }
 #close {
     margin-left: auto;
@@ -221,5 +221,14 @@ button:hover {
     gap: 20px;
     height: 15%;
     width: 90%;
+    justify-content: end;
+}
+#taskEditForm {
+    display: flex;
+    flex-direction: column;
+}
+.closeEd {
+    width: 100%;
+    display: flex;
     justify-content: end;
 }
