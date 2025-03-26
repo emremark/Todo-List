@@ -42,6 +42,11 @@ export const UI = (function () {
             delTaskButton.className = "delTaskButton";
             delTaskButton.textContent = "Delete";
             delTaskButton.setAttribute("data-taskt", item.id);
+            //Task button Edit
+            let editTaskButton = document.createElement("button");
+            editTaskButton.className = "editTaskButton";
+            editTaskButton.textContent = "Edit";
+            editTaskButton.setAttribute("data-taskt", item.id);
 
             let task_title = document.createElement("div");
             let task_priority = document.createElement("div");
@@ -52,6 +57,7 @@ export const UI = (function () {
             task_due.textContent = `Due date: ${item.dueDate}`;
 
             taskButtonCont.appendChild(delTaskButton);
+            taskButtonCont.appendChild(editTaskButton);
             taskContentDiv.appendChild(task_title);
             taskContentDiv.appendChild(task_priority);
             taskContentDiv.appendChild(task_due);

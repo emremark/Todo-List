@@ -108,9 +108,10 @@ export const eventListeners = (function () {
             acti.removeTask(taskId);
             UI.renderActiveProject(acti);
         }
-        if (event.target.classList.contains("tdiv")) {
+        if (event.target.classList.contains("editTaskButton")) {
             event.stopPropagation();
             let taskId = Number(event.target.getAttribute("data-taskt"));
+            console.log(taskId);
             let activ = ProjectModule.getActive();
             let taskObj = activ.getTask(taskId);
 
@@ -118,29 +119,38 @@ export const eventListeners = (function () {
             document.getElementById("dateEdit").value = taskObj.dueDate;
             document.getElementById("priorityEdit").value = taskObj.priority;
             document.getElementById("descriptionEdit").value = taskObj.description;
+            document.querySelector("#submitEdit").setAttribute("data-taskt", taskObj.id);
             document.querySelector("#taskEditDia").showModal();
 
-            document.querySelector("#submitEdit").addEventListener("click", (e) => {
-                e.preventDefault();
-                let f = document.querySelector("#taskEditForm");
-                if ( !f.checkValidity() ) {
-                    f.reportValidity();
-                    return;
-                }
-                taskObj.title = document.getElementById("titleEdit").value;
-                taskObj.dueDate = document.getElementById("dateEdit").value;
-                taskObj.priority = document.getElementById("priorityEdit").value;
-                taskObj.description = document.getElementById("descriptionEdit").value
-        
-                UI.renderActiveProject(ProjectModule.getActive());
-                document.querySelector("#taskEditDia").close();
-            })
+            let sbmt = document.querySelector("#submitEdit");
+            //sbmt.removeEventListener("click", subTaskEd);
+            sbmt.addEventListener("click", subTaskEd);
+
             document.querySelector("#closeEdit").addEventListener("click", (e) => { 
                 e.preventDefault();
                 document.querySelector("#taskEditDia").close();
             })
         }
     });
+        function subTaskEd(e)  {
+            e.preventDefault();
+            let f = document.querySelector("#taskEditForm");
+            if ( !f.checkValidity() ) {
+                f.reportValidity();
+                return;
+            }
+            let taskId = Number(e.target.getAttribute("data-taskt"));
+            let activ = ProjectModule.getActive();
+            let taskObj = activ.getTask(taskId);
+            taskObj.title = document.getElementById("titleEdit").value;
+            taskObj.dueDate = document.getElementById("dateEdit").value;
+            taskObj.priority = document.getElementById("priorityEdit").value;
+            taskObj.description = document.getElementById("descriptionEdit").value
+
+            UI.renderActiveProject(ProjectModule.getActive());
+            document.querySelector("#taskEditDia").close();
+        
+    }
 
 }    
     return {initializeEvents}
