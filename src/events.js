@@ -1,6 +1,7 @@
 import { ProjectModule } from "/home/vboxuser/Desktop/js/Todo-List/src/project"
 import { UI } from "./UI";
 import { oneTask } from "./task";
+import { locStorage } from "./storage";
 
 export const eventListeners = (function () {
 
@@ -28,6 +29,8 @@ export const eventListeners = (function () {
         UI.renderProjects();
         document.getElementById("newProjectDialog").close();
         document.getElementById("name").value = "";
+        //new
+        locStorage.addToStorage(ProjectModule.projectList);
     })
     //Event listener for entire projects area, if the clicked target is of class project_button get name and find that name in project list. Call UI to render it.
     document.getElementById("projects_container").addEventListener("click", (event) => {
@@ -74,6 +77,7 @@ export const eventListeners = (function () {
 
         document.querySelector("#taskDia").close();
         f.reset();
+        locStorage.addToStorage(ProjectModule.projectList);
     })
 
     //Delete button click event
@@ -96,7 +100,7 @@ export const eventListeners = (function () {
             }
         }
         UI.renderProjects();
-
+        locStorage.addToStorage(ProjectModule.projectList);
     })
     
     //Task button event for Delete:
@@ -107,11 +111,11 @@ export const eventListeners = (function () {
             let acti = ProjectModule.getActive();
             acti.removeTask(taskId);
             UI.renderActiveProject(acti);
+            locStorage.addToStorage(ProjectModule.projectList);
         }
         if (event.target.classList.contains("editTaskButton")) {
             event.stopPropagation();
             let taskId = Number(event.target.getAttribute("data-taskt"));
-            console.log(taskId);
             let activ = ProjectModule.getActive();
             let taskObj = activ.getTask(taskId);
 
@@ -125,6 +129,7 @@ export const eventListeners = (function () {
             let sbmt = document.querySelector("#submitEdit");
             //sbmt.removeEventListener("click", subTaskEd);
             sbmt.addEventListener("click", subTaskEd);
+            locStorage.addToStorage(ProjectModule.projectList);
 
             document.querySelector("#closeEdit").addEventListener("click", (e) => { 
                 e.preventDefault();
